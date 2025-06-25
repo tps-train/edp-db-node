@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MongoDB Notes</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../external.js" defer></script>
+</head>
+<body>
+    <h1>PostgreSQL Q&A Learning</h1>
+
+    <button class="collapsible">What type of database service is Postgres?</button>
+    <div class="content">
+        <ul>
+            <li>A relational database management system</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">What is meant by an E.R.D. (entity relationship diagram)?</button>
+    <div class="content">
+        <ul>
+            <li>A diagram showing the interconnectivity of dependencies between tables.</li>
+            <li><a href="images/printable-postgresql-sample-database-diagram-1.png" target="erd">Example from Postgres DVD Rental</a></li>
+            <li><a href="files/printable-postgresql-sample-database-diagram.pdf" target="erd">The PDF version of the ERD.</a></li>
+        </ul>
+    </div>
+
+    <button class="collapsible">What is meant by a 1:M relationship?</button>
+    <div class="content">
+        <ul>
+            <li>A relational between 2 tables, where one value will appear multiple times in the other table.</li>
+            <img src="images/relationship-diagram-one-to-many.png" height="70%" width="70%">
+        </ul>
+    </div>
+
+    <button class="collapsible">What is meant by referential integrity?</button>
+    <div class="content">
+        <ul>
+            <li>The relational database system when designed with tables containing primary and foreign keys will ensure that data must exist in the primary key table for the data to be valid in the foreign key table.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">What should be done during the design process with M:M relationships?</button>
+    <div class="content">
+        <ul>
+            <li>A joining table should be created, where both primary keys from the main tables become a <b>composite key</b> in the joining table.</li>
+            <li>A joining table may also be referred to as
+                <ul>
+                    <li>Junction table</li>
+                    <li>Mapping table</li>
+                    <li>Cross-reference table</li>
+                    <li>Bridge table</li>
+                    <li>Intersection table</li>
+                </ul>
+            </li>
+            <li>
+            <button class="collapsible2">Example M:M</button>
+            <div class="content">
+                <img src="images/MtoM.png" width="70%" height="70%">
+            </div>
+            </li>
+            <li>
+                <button class="collapsible2">Example join</button>
+                <div class="content">
+                    <img src="images/join-multiple-tables-tables-needed.png">
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Postgres uses what RDBMs language?</button>
+    <div class="content">
+        <ul>
+            <li>SQL = Structured Query Language.</li>
+            <li>Like MongoDB it also has CRUD operations.</li>
+            <li>SQL is split into 2 command groups:
+                <ul>
+                    <li>DDL = Data Definition Language - used to create databases, tables and other objects for the SCHEMA
+                        <ul>
+                            <li>CREATE/DROP/ALTER table</li>
+                            <li>CREATE/DROP/ALTER database</li>
+                            <li>CREATE/DROP/ALTER index</li>
+                            <li>CREATE/DROP/ALTER constraint</li>
+                        </ul>
+                    </li>
+                    <li>DML = Data Manipulation Language.  The developer CRUD operations.
+                        <ul>
+                            <li>INSERT/SELECT/UPDATE/DELETE from tablename</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="https://www.postgresql.org/docs/16/sql-commands.html" target="sql">Postgres SQL command reference</a></li>
+            <li><a href="https://www.w3schools.com/postgresql/index.php" target="w3">w3schools Postgres Tutorial</a></li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Postgres has it&apos;s own commands, which are preceded by which character?</button>
+    <div class="content">
+        <ul>
+            <li>The backslash <b style="font-size: 26pt">\</style></b> is placed in front of Postgres specific commands.</li>
+            <ul>Examples:
+                <li>\? = help</li>
+                <li>\q = quit the command line shell</li>
+                <li>\c = connect to a Postgres database.  Like use in Mongo and other database servers.</li>
+                <li>\l = list all database schemas</li>
+                <li>\d or \d+= list all tables in the current schema</li>
+                <li>\d <i>tableName</i> = list columns in table</li>
+            </ul>
+            <li><a href="https://www.postgresql.org/docs/16/app-psql.html" target="psql">The <b>psql</b> command reference</a></li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Tutorials and exercises local vesions</button>
+    <div class="content">
+        <ul>
+            <li>Tutorials:
+                <ul>
+                    <li><a href="files/SQL Part 1 _ databases_workshop.html" target="tutorials">SQL Part 1</a></li>
+                    <li><a href="files/SQL Part 2 _ databases_workshop.html" target="tutorials">SQL Part 2</a></li>
+                    <li><a href="files/SQL Part 3 _ databases_workshop.html" target="tutorials">SQL Part 3</a></li>
+                    <li><a href="files/SQL Part 4 _ databases_workshop.html" target="tutorials">SQL Part 4</a></li>
+                </ul>
+            </li>
+            <li>Exercises:
+                <ul>
+                    <li><a href="files/SQL Part 1_ Exercises _ databases_workshop.html" target="tutorials">SQL Part 1</a></li>
+                    <li><a href="files/SQL Part 2_ Exercises_Answers _ databases_workshop.html" target="tutorials">SQL Part 2</a></li>
+                </ul>
+            </li>
+            <li>Answers:
+                <ul>
+                    <li><a href="files/SQL Part 1_ Exercises_Answers _ databases_workshop.html" target="tutorials">SQL Part 1</a></li>
+                    <li><a href="files/SQL Part 2_ Exercises_Answers _ databases_workshop.html" target="tutorials">SQL Part 2</a></li>
+                    <li><a href="files/SQL Part 4_ Exercises_Answers _ databases_workshop.html" target="tutorials">SQL Part 3</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <button class="collapse-all-btn" title="Collapse All">&#8722;</button>
+
+</body>
+</html>
