@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MongoDB Notes</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="MongoDB.js" defer></script>
+</head>
+<body>
+  <h1>MongoDB Q&A Learning</h1>
+
+  <button class="collapsible">What type of Database is MongoDB?</button>
+  <div class="content">
+    <ul>
+        <li>Is a document oriented noSQL database</li>
+    </ul>
+  </div>
+
+  <button class="collapsible">What is the data format of a document in MongoDB?</button>
+  <div class="content">
+    <ul>
+      <li>Mongo documents are JSON-like called BSON</li>
+    </ul>
+  </div>
+
+  <button class="collapsible">How does MongoDB handle data high availability, data redundancy and replication?</button>
+  <div class="content">
+    <ul>
+      <li>It <b>shards</b>, splits the data across multiple servers called a cluster.</li>
+      <li>The cluster is created as n+1, where we can lose a single server and still have all the data.</li>
+      <li>Enables fast indexing and searches.</li>
+    </ul>
+  </div>
+
+  <button class="collapsible">What is the hierarchy of storing data in MongoDB?  Your start is what is in a database?</button>
+  <div class="content">
+    <img src="images/Mongo_hierachy.png">
+  </div>
+
+  <button class="collapsible">JSON has the basic data format of _____/_____ pair?</button>
+  <div class="content">
+    <ul>
+      <li>Key/Value</li>
+      <li>JSON uses <code>&quot;key&quot;: &quot;value&quot;</code></li>
+    </ul>
+  </div>
+
+  <button class="collapsible">Developers love MongoDB because of the fixed data structure, just like RDBMS.  True or False?</button>
+  <div class="content">
+    <ul>
+      <li><b>FALSE</b></li>
+      <li>The structure of a document can change.  We can add fields, or miss fields when adding a document to a collection,</li>
+      <li>As a developer it is important that we check what is acceptable in the way of fields.</li>
+      <li>As a developer it is important that we ensure the keys are in the exact same case, not just the data.</li>
+        <ul>
+          <li>Unlike RDBMS the column names are not fixed.</li>
+        </ul>
+    </ul>
+  </div>
+
+  <button class="collapsible">What is the structure of a MongoDB statement?</button>
+  <div class="content">
+    <ul>
+      <li><b>db.</b><i>collection.</i>action</li>
+      <li>The find() method looks similar to JSON, except the <b>keys</b> are <b>not</b> quoted.</li>
+      <li>String values must be quoted.</li>
+      <li>Keys may have arrays or dictionaries as their values.</li>
+      <li>Example: <code>db.socks.find( { color: 'blue' } )</code></li>
+    </ul>
+  </div>
+
+  <button class="collapsible">It's all just a load of CRUD.</button>
+  <div class="content">
+    <button class="collapsible2">Create a document in a collection called socks.</button>
+    <div class="content">
+      <ul>
+        <li><code>
+          db.socks.insertOne( { sockOwner: "Steve", size: 9, color: "Blue", pattern: "Polkadot", material: "Cotton", condition: "Good", forFoot: "Left" } )
+        </code></li>
+        <li>All the functions start with <b>insert</b>, e.g. insertOne and insertMany</li>
+        <button class="collapsible2">insertMany Example.</button>
+        <div class="content">
+            <code>
+              db.socks.insertMany( [
+                { sockOwner: "Christine", size: 5, color: "Rose/White", pattern: "Stiped", material: "Wool", condition: "Excellent", forFoot: "Both" },
+                { sockOwner: "Rap", size: 10, color: "Navy Blue", pattern: "None", material: "Syntetic", condition: "Good", forFoot: "Right" } 
+                { sockOwner: "Ola", size: 8, color: "Black", pattern: "Pin-stipe", material: "Wool", condition: "Good", forFoot: "Left" } 
+                { sockOwner: "Fox", size: 9, color: "Black/White", pattern: "Checked", material: "Wool", condition: "Good", forFoot: "Both" } 
+              ] )
+            </code>
+        </div>
+      </ul>
+    </div>
+    <button class="collapsible2">Read (find) all documents in a collection called socks.</button>
+    <div class="content">
+      <ul>
+        <li><code>db.socks.find()</code></li>
+      </ul>
+    </div>
+    <button class="collapsible2">Read (find) all documents in a collection called socks which are left socks.</button>
+    <div class="content">
+      <ul>
+        <li><code>
+          db.socks.find( {"forFoot": "Left"} )
+        </code></li>
+        <li>
+          Logical <b>OR</b> operation:<br>
+          <code>
+            db.socks.find( { $or: [ {"forFoot": "Left"}, {"size": 9} ]})
+          </code>
+        </li>
+        <li>And is the same, but using <b>$and:</b>.  You also have $nor and $not</li>
+      </ul>
+    </div>
+    <button class="collapsible2">Update the document Steve in the socks collection.</button>
+    <div class="content">
+      <ul>
+        <li>db.socks.updateOne( { sockOwner: "Steve" }, { $set: { 'size': 8 } } )</li>
+        <li>All the functions start with <b>update</b>, e.g. updateOne and updateMany</li>
+      </ul>
+    </div>
+    <button class="collapsible2">Delete the document Steve in the socks collection.</button>
+    <div class="content">
+      <ul>
+        <li>db.socks.deleteOne( { sockOwner: 'Steve' } )</li>
+        <li>All the functions start with <b>update</b>, e.g. deleteOne and deleteMany</li>
+        <li>**NOTE:** There is also a **remove** method that works the same as <b>deleteOne</b>, but is less common now.</li>
+      </ul>
+    </div>
+  </div>
+  <button class="collapsible2">SQL to MongoDB cheat sheet</button>
+  <div class="content">
+    <ul>
+      <li><a href='https://learn.mongodb.com/learn/course/mongodb-sql-cheat-sheet/main/mongodb-sql-cheat-sheet' target="new">MongoDB SQL Cheat Sheet</a></li>
+    </ul>
+  </div>
+
+  <button class="collapse-all-btn" title="Collapse All">&#8722;</button>
+</body>
+</html>

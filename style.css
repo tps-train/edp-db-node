@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16pt;
+    margin: 2em;
+    background: #f9f9f9;
+}
+.collapsible {
+    background-color: #345035;
+    color: white;
+    cursor: pointer;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.collapsible:hover {
+    background-color: #006904;
+}
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0 0 4px 4px;
+    margin-bottom: 10px;
+}
+
+.collapse-all-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    font-size: 1.5em;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: pointer;
+    z-index: 1000;
+    transition: background 0.2s;
+}
+.collapse-all-btn:hover {
+    background: #388e3c;
+}
+
+.collapsible2 {
+    background-color: rgb(55, 93, 100);
+    color: white;
+    cursor: pointer;
+    padding: 14px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.collapsible2:hover {
+    background-color: #006967;
+}
