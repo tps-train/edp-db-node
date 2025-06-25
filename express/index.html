@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Express Notes</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../external.js" defer></script>
+</head>
+<body>
+    <h1>Express Q&A Learning</h1>
+
+    <button class="collapsible">What is Express?</button>
+    <div class="content">
+        <ul>
+            <li>A web server framework built on top of Node.js HTTP module.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">What features does Express provide to help build large web applications?</button>
+    <div class="content">
+        <ul>
+            <li>Routing</li>
+            <li>Templating</li>
+            <li>Static file serving</li>
+            <li>Extensible with modules to provide caching, security, logging</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">How do you install Express?</button>
+    <div class="content">
+        <code>npm install express</code>
+    </div>
+
+    <button class="collapsible">What do we mean by a route in Express?</button>
+    <div class="content">
+        <ul>
+            <li>Routes provide endpoints supplied as a URI to your web service.</li>
+            <li>Each endpoint will run a piece of Node.js code, or function.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">What HTTP methods can I supply to my requests to change the way my request is treated?  Think CRUD operations.</button>
+    <div class="content">
+        <ul>
+            <li>GET = .get()</li>
+            <li>POST = .post()</li>
+            <li>PUT = .put()</li>
+            <li>DELETE = .delete()</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Express route example?</button>
+    <div class="content">
+        <pre>
+            import { Client } from 'pg';
+            import express from 'express';
+            const app = express();
+            const port = 3000;
+
+            app.get('/actors', async (req, res) => {
+                const client = new Client({
+                    user: 'postgres',
+                    host: 'localhost',
+                    database: 'dvdrental',
+                    password: 'secret123',
+                    port: 5432,
+                });
+                try {
+                    await client.connect();
+                    const result = await client.query('SELECT * FROM actor');
+                    res.json(result.rows);
+                } catch (err) {
+                    res.status(500).json({ error: 'Database query failed' });
+                } finally {
+                    await client.end();
+                }
+            });
+
+            app.listen(9000, () => {
+                console.log(`Server is running on http://localhost:9000`);
+            });
+        </pre]>
+    </div>
+
+    <button class="collapsible">URI naming and conventions?</button>
+    <div class="content">
+        <ul>
+            <li>URIs should be made up of <pre>serviceName/object[/attribute]</pre></li>
+            <li>The <b>object</b> should be in plural format
+                <ul>Examples:
+                    <li>dvdrental/films</li>
+                    <li>dvdrental/actors</li>
+                    <li>dvdrental/films/42</li>
+                    <li>dvdrental/actors/3</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <button class="collapsible">How do I specify a parameter in my code for a Route?</button>
+    <div class="content">
+        <ul>
+            <li>Use the colon operator before the parameter name</li>
+            <li>Examples:
+                <ul>
+                    <li>dvdrental/films/:id</li>
+                    <li>dvdrental/actors/:name</li>
+                </ul>
+            </li>
+            <li>Yes, you can have multiple parameters, use a forward slash <b style="font-size: 22pt;">/</b> to separate each parameter.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">How does Express deal with order of routes?</button>
+    <div class="content">
+        <ul>
+            <li>1st match executes</li>
+            <li>Example:<br>
+                <pre>
+                    app.get('/planets/*', function (req, res) {
+                        //...
+                    })
+                    .get('/planets/:name', function (req, res) {
+                        //...
+                    })
+                </pre>
+            </li>
+            <li>If you need to match all then use <b>next();</b></li>
+            <li>Example:<br>
+                <pre>
+                    app.get('/planets/*', function (req, res, next) {
+                        //...
+                    next(); //Invoke next matching route
+                    })
+                    .get('/planets/:name', function (req, res) {
+                        //...
+                    })
+                </pre>
+            </li>
+        </ul>
+    </div>
+
+
+    <button class="collapse-all-btn" title="Collapse All">&#8722;</button>
+
+</body>
+</html>
