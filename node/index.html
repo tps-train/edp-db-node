@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Node Notes</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="../external.js" defer></script>
+</head>
+<body>
+    <h1>Node Q&A Learning</h1>
+
+    <button class="collapsible">What is Node.js?</button>
+    <div class="content">
+        <ul>
+            <li>A platform to build high-performance JavaScript server applications</li>
+            <li>Built on the v8 engine from Google</li>
+            <li>Node is a <b>runtime environment</b> not a language.</li>
+            <li>Uses a single-threaded event loop for concurrency.</li>
+            <li>Event driven, non-blocking file and networking I/O. The ability to perform multi-HTTP requests concurrently, or file access.</li>
+            <li>Interprets the JavaScript code, allowing JavaScript developers to write server code quickly using all the existing features.</li>
+            <li>Great to enable <b>Full Stack Developers</b></li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Does Node.js use npm for module dependencies?</button>
+    <div class="content">
+        <ul>
+            <li>Yes it does.  We want to make use of all the cool stuff other people have created to save us time.  Let's install and use it.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">What sort of programs can you create with Node.js?</button>
+    <div class="content">
+        <ul>
+            <li>Server applications, such as REST APIs, web services, and other server programs.</li>
+            <li>Command line applications.</li>
+            <li>Desktop applications with GUIs.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Do you remember the most basic Hello World in Node.js to write to the console?</button>
+    <div class="content">
+        <ul>
+            <li>
+            <code>console.log("Hello World");</code>
+            </li>
+            <li>Note the semi-colon, which is optional, but for pure JavaScript and linting you should include them.</li>
+        </ul>
+    </div>
+
+    <button class="collapsible">Let's create the Hello World as a web applications.</button>
+    <div class="content">
+        <pre>
+            let http = require("http");
+
+            http.createServer(function(request, response) {
+                response.writeHead(200, {"Content-Type": "text/plain"});
+                response.write("Hello, Node World!");
+                response.end();
+            }).listen(9000);
+        </pre]>
+        <p>See page 156.</p>
+        <p>Once you run the application, point your web browser at <a href="http://localhost:9000" target="node">http://localhost:9000</a></p>
+    </div>
+
+    <button class="collapsible">Let's connect to a Postgres database.</button>
+    <div class="content">
+        <pre>
+            import { Client } from 'pg';
+
+            const client = new Client({
+                user: 'postgres',
+                host: 'localhost',
+                database: 'dvdrental',
+                password: 'secret123',
+                port: 5432,
+            });
+
+            async function queryActors() {
+                try {
+                    await client.connect();
+                    const res = await client.query('SELECT * FROM actor');
+                    res.rows.forEach(row => {
+                        console.log(row);
+                    });
+                } catch (err) {
+                    console.error('Error querying actors:', err);
+                } finally {
+                    await client.end();
+                }
+            }
+
+            queryActors();
+        </pre]>
+    </div>
+
+    <button class="collapsible">Let's connect to a Mongo database.</button>
+    <div class="content">
+        <pre>
+            import { MongoClient } from "mongodb";
+
+            const url = "mongodb://root:secret123@localhost:27017/";
+
+            async function run() {
+                const client = new MongoClient(url);
+                try {
+                    await client.connect();
+                    const dbo = client.db("socks");
+                    const result = await dbo.collection("socks").find({}).toArray();
+                    console.log(result);
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    await client.close();
+                }
+            }
+
+            run();
+        </pre]>
+    </div>
+
+    <button class="collapse-all-btn" title="Collapse All">&#8722;</button>
+
+</body>
+</html>

@@ -6,6 +6,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret123
     volumes:
       - 'mongodb:/data/db'
+    ports:
+      - 27017:27017
 
 volumes:
   mongodb:
